@@ -47,12 +47,12 @@
                      {% for item in cart_items %}
                      <div class="d-flex justify-content-between mb-2">
                          <span>{{ item.product.name }} (x{{ item.quantity }})</span>
-                         <span>${{ item.total_price }}</span>
+                         <span>₹{{ item.total_price }}</span>
                      </div>
                      {% endfor %}
                      <div class="d-flex justify-content-between border-top pt-3 mt-3">
                         <h5>Total</h5>
-                        <h5>${{ total }}</h5>
+                        <h5>₹{{ total }}</h5>
                     </div>
                 </div>
             </div>

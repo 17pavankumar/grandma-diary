@@ -17,7 +17,11 @@
             <div class="col-lg-6">
                 <h1 class="display-5 mb-4">{{ product.name }}</h1>
                 <p class="mb-4">{{ product.description }}</p>
-                <h3 class="text-primary mb-4">${{ product.price }}</h3>
+                {% if product.discount_price %}
+                    <h3 class="text-primary mb-4">₹{{ product.discount_price }} <span class="text-body text-decoration-line-through fs-5">₹{{ product.price }}</span></h3>
+                {% else %}
+                    <h3 class="text-primary mb-4">₹{{ product.price }}</h3>
+                {% endif %}
                 <div class="d-flex align-items-center mb-4">
                     <p class="mb-0 me-3">Category:</p>
                     <a href="" class="badge bg-secondary text-decoration-none">{{ product.category.name }}</a>

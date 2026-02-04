@@ -21,7 +21,7 @@
                     {% for item in cart_items %}
                     <tr>
                         <td>{{ item.product.name }}</td>
-                        <td>${{ item.product.price }}</td>
+                        <td>₹{{ item.product.price }}</td>
                         <td>
                             <div class="input-group quantity" style="width: 100px;">
                                 <div class="input-group-btn">
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>${{ item.total_price }}</td>
+                        <td>₹{{ item.total_price }}</td>
                         <td>
                             <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                         </td>
@@ -52,11 +52,11 @@
                     <h4 class="mb-4">Cart Total</h4>
                     <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
                         <h6>Subtotal</h6>
-                        <h6>${{ total }}</h6>
+                        <h6>₹{{ total }}</h6>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6>Total</h6>
-                        <h6>${{ total }}</h6>
+                        <h6>₹{{ total }}</h6>
                     </div>
                     <a href="{% url 'checkout' %}" class="btn btn-primary rounded-pill py-3 px-5 mt-4 w-100">Proceed to Checkout</a>
                 </div>
