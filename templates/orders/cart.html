@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Cart - Grandma Diary{% endblock %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <h2 class="mb-5 text-center">Your Cart</h2>
+        {% if cart_items %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>${{ item.product.price }}</td>
+                        <td>
+                            <div class="input-group quantity" style="width: 100px;">
+                                <div class="input-group-btn">
+                                    <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                    <i class="fa fa-minus"></i>
+                                    </a>
+                                </div>
+                                <input type="text" class="form-control form-control-sm text-center border-0" value="{{ item.quantity }}">
+                                <div class="input-group-btn">
+                                    <a href="{% url 'add_to_cart' item.product.id %}" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${{ item.total_price }}</td>
+                        <td>
+                            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-6 ms-auto">
+                <div class="bg-light rounded p-4">
+                    <h4 class="mb-4">Cart Total</h4>
+                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                        <h6>Subtotal</h6>
+                        <h6>${{ total }}</h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6>Total</h6>
+                        <h6>${{ total }}</h6>
+                    </div>
+                    <a href="{% url 'checkout' %}" class="btn btn-primary rounded-pill py-3 px-5 mt-4 w-100">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center">
+            <h3>Your cart is empty</h3>
+            <a href="{% url 'product_list' %}" class="btn btn-primary rounded-pill py-3 px-5 mt-3">Browse Products</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

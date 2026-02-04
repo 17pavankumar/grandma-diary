@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Profile - Grandma Diary{% endblock %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <h2 class="mb-5 text-center">My Profile</h2>
+        <div class="row g-5">
+            <div class="col-lg-4">
+                <div class="bg-light p-4 rounded">
+                    <h4>Customer Details</h4>
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    {% if user.customer_profile %}
+                    <p><strong>Phone:</strong> {{ user.customer_profile.phone_number }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="bg-light p-4 rounded">
+                    <h4 class="mb-4">Recent Orders</h4>
+                    {% if orders %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td>#{{ order.id }}</td>
+                                    <td>{{ order.created_at|date:"M d, Y" }}</td>
+                                    <td>
+                                        {% if order.paid %}
+                                        <span class="badge bg-success">Paid</span>
+                                        {% else %}
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>${{ order.get_total_cost }}</td>
+                                    <td><button class="btn btn-sm btn-primary rounded-pill">View</button></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p>No recent orders found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

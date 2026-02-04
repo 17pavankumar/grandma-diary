@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Login - Grandma Diary{% endblock %}
+
+{% block content %}
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <h1 class="display-3 mb-3 animated slideInDown">Login</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a class="text-body" href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item text-dark active" aria-current="page">Login</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-7">
+                    <div class="bg-white p-5 rounded shadow-lg wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="text-center mb-4">
+                            <h1 class="text-primary mb-2">Welcome Back!</h1>
+                            <p class="text-muted">Please login to continue to your account.</p>
+                        </div>
+                        
+                        <form method="post" class="custom-form">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    <small>Please correct the errors below.</small>
+                                </div>
+                            {% endif %}
+                            
+                            {% for field in form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label fw-bold small text-uppercase">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+
+                            <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill mt-3">Login</button>
+                        </form>
+                        
+                        <div class="text-center mt-4">
+                            <p class="mb-0 text-muted">Don't have an account?</p>
+                            <a href="{% url 'register' %}" class="fw-bold text-primary">Create an Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple script to add Bootstrap classes to Django form fields
+        document.addEventListener('DOMContentLoaded', function() {
+            var inputs = document.querySelectorAll('.custom-form input, .custom-form select, .custom-form textarea');
+            inputs.forEach(function(input) {
+                if (input.type === 'checkbox' || input.type === 'radio') {
+                    input.classList.add('form-check-input');
+                } else {
+                    input.classList.add('form-control', 'py-3');
+                    input.setAttribute('placeholder', ' '); // Helps with some CSS frameworks if needed
+                }
+            });
+        });
+    </script>
+{% endblock %}

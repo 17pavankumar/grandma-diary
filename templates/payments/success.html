@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Payment Success - Grandma Diary{% endblock %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container text-center">
+        <h1 class="display-3 text-success mb-4"><i class="fa fa-check-circle"></i></h1>
+        <h2 class="mb-4">Payment Successful!</h2>
+        <p class="mb-4">Thank you for your order.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary rounded-pill py-3 px-5">Go to Home</a>
+    </div>
+</div>
+{% endblock %}
